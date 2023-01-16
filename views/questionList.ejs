@@ -24,12 +24,13 @@
             <% for (var i=0; i<questions.length; i++) { %>
                 <div class="flex justify-between gap-6">
                     <li class="text-xl"><%= questions[i].title %></li>
-                    <% if (!election.launched) { %>
                         <div class="flex gap-4 justify-center items-center">
                             <a href="/election/<%= election.id %>/question/<%= questions[i].id %>"><i class="cursor-pointer fa fa-eye hover:text-blue-700 transition duration-200"></i></a>
-                            <div onclick="deleteQuestion('<%= questions[i].id %>')"><i class="cursor-pointer fa fa-trash hover:text-red-500 transition duration-200"></i></div>
+                            <% if (!election.launched) { %>
+                                <a href="/election/<%= election.id %>/question/<%= questions[i].id %>/edit"><i class="cursor-pointer fa fa-edit hover:text-blue-700 transition duration-200"></i></a>
+                                <div onclick="deleteQuestion('<%= questions[i].id %>')"><i class="cursor-pointer fa fa-trash hover:text-red-500 transition duration-200"></i></div>
+                            <% } %>
                         </div>
-                    <% } %>
                 </div>
             <% } %>
             </div>

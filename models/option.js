@@ -21,6 +21,20 @@ module.exports = (sequelize, DataTypes) => {
       });
       return res;
     }
+
+    static async edit(newValue, id) {
+      const res = await Option.update(
+        {
+          value: newValue,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      return res;
+    }
   }
   Option.init(
     {

@@ -25,6 +25,21 @@ module.exports = (sequelize, DataTypes) => {
       });
       return res;
     }
+
+    static async edit(title, desctiption, questionID) {
+      const res = await question.update(
+        {
+          title: title,
+          description: desctiption,
+        },
+        {
+          where: {
+            id: questionID,
+          },
+        }
+      );
+      return res;
+    }
   }
   question.init(
     {

@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Edit Question | Online Voting Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full">
+    <div class="flex justify-center text-blue-800">
+      <%- include ('updatedHeader', {username: username}) %>
+    </div>
+    <div class="flex flex-col justify-center items-center p-4">
+      <div class="flex flex-col justify-center md:w-2/5 w-full">
+        <hr />
+        <div class="pt-6 flex justify-between">
+          <a href="/election/<%= election.id %>" class="font-bold text-4xl hover:underline"
+            ><%= election.name %></a
+          >
+        </div>
+
+        <!-- Update Question -->
+        <div class="pt-6">
+          <p class="text-gray-600 text-2xl">Edit Question</p>
+          <form
+            method="post"
+            action="/election/<%= election.id %>/question/<%= question.id %>/update"
+            class="flex flex-col gap-4 pt-4"
+          >
+            <div class="flex flex-col w-full">
+              <input
+                type="text"
+                name="title"
+                value="<%= question.title %>"
+                placeholder="Title"
+                class="border-2 border-black p-2 rounded-lg"
+              />
+            </div>
+            <div class="flex flex-col w-full">
+              <input
+                type="text"
+                name="description"
+                value="<%= question.description %>"
+                placeholder="Description"
+                class="border-2 border-black p-2 rounded-lg"
+              />
+            </div>
+            <div class="flex justify-center items-center w-full gap-4">
+              <button
+                type="submit"
+                class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+              >
+                Update
+              </button>
+              <button
+                class="bg-gray-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-gray-600 px-6"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

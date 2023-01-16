@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title><%= %>Vote | <%= election.name %> | Online Voting Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full">
+    <div class="flex justify-center text-blue-800">
+      <%- include ('header') %>
+    </div>
+    <div class="flex flex-col justify-center items-center p-4">
+      <div class="flex flex-col justify-center md:w-2/5 w-full">
+        <hr />
+        <div class="flex justify-center pb-4">
+          <p class="text-4xl font-semibold pt-4"><%= election.name %></p>
+        </div>
+
+        <% if (election.ended) { %>
+            <div class="flex justify-center">
+                <p class="text-2xl text-gray-600">This election has ended.</p>
+            </div>
+        <% } else if (!election.launched) { %>
+            <div class="flex justify-center">
+                <p class="text-2xl text-gray-600">This election has not been launched yet.</p>
+            </div>
+        <% } else { %>
+            <div class="flex flex-col gap-4">
+
+                <!-- Voter authentication -->
+                <% if (!verified) { %>
+                    <form action="/election/<%= election.id %>/vote" method="post" class="flex flex-col gap-4 justify-center items-center">
+                        <div class="flex flex-col gap-2">
+                            <label for="voterID">Voter ID</label>
+                            <input
+                            class="border-2 flex items-center border-black p-2 rounded-lg"
+                            id="voterID"
+                            type="number"
+                            name="voterID"
+                            />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="password">Password</label>
+                            <input
+                            class="border-2 flex items-center border-black p-2 rounded-lg"
+                            id="password"
+                            type="password"
+                            name="password"
+                            />
+                        </div>
+                        <button class="flex justify-center mt-4 p-2 rounded-lg bg-purple-500 hover:bg-purple-700 border-2 border-purple-800">Submit</button>
+                    </form>
+                <% } else { %>
+                    <!-- Ballot -->
+                    <div>
+                        <p class="text-xl">Voter ID: <b><%= voter.voterID %></b></p>
+                    </div>
+
+                    <% if (submitted) { %>
+                        <p class="flex justify-center text-2xl text-gray-600 pt-8">Thank you for participating in the election!</p>
+                    <% } else { %>
+                        <form action="/election/<%= election.id %>/voter/<%= voter.id %>/submit" method="post" class="pt-6">
+                            <% for (var i=0; i<questions.length; i++) { %>
+                                <div>
+                                    <p class="font-bold text-xl"><%= i+1 %>. <%= questions[i].title %></p>
+                                    <p class="text-gray-600"><%= questions[i].description %></p>
+
+                                    <div class="pt-2 pl-6">
+                                        <fieldset id="question-<%= questions[i].id %>">
+                                            <% for (var j=0; j<options[i].length; j++) { %>
+                                                <div class="flex gap-2">
+                                                    <input
+                                                        class="border-2 flex items-center border-black p-2 rounded-lg"
+                                                        id="question-<%= questions[i].id %>-<%= options[i][j].id %>"
+                                                        type="radio"
+                                                        value="<%= options[i][j].id %>"
+                                                        name="question-<%= questions[i].id %>"
+                                                    />
+                                                    <label for="question-<%= questions[i].id %>-<%= options[i][j].id %>"><%= options[i][j].value %></label>
+                                                </div>
+                                            <% } %>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            <% } %>
+                            <button class="flex justify-center items-center w-full mt-8 p-2 rounded-lg bg-blue-500 hover:bg-blue-700 border-2 border-blue-800 text-white font-bold">Submit</button>
+                        </form>
+                    <% } %>
+                <% } %>
+            </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
