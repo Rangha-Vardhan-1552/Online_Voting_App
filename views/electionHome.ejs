@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <title><%= %>Online Voting Platform | Pranshu Aggarwal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script>
+      // launch election API
+      function launchElection(id) {
+        fetch(`/election/${id}/launch`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.ok) {
+            window.location.reload();
+          }
+        });
+      }
+
+      // end election API
+      function endElection(id) {
+        fetch(`/election/${id}/end`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.ok) {
+            window.location.reload();
+          }
+        });
+      }
+    </script>
+  </head>
+  <body class="bg-gradient-to-tl from-gray-200 to-green-500 h-full w-full">
+    <div class="flex justify-center text-blue-800">
+      <%- include ('updatedHeader', {username: username}) %>
+    </div>
+    <div class="flex flex-col justify-center items-center p-4">
+      <div class="flex flex-col justify-center md:w-2/5 w-full">
+        <hr />
+
+        <div class="flex flex-col md:flex-row justify-between gap-4">
+          <div>
+            <p class="text-4xl font-semibold"><%= election.name %></p>
+            <p class="text-xl text-gray-500">
+              <%= questions.length %> Questions
+            </p>
+          </div>
+          <div class="flex gap-4 items-center">
+            <% if (!election.ended) { %> <% if (!election.launched) { %>
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Preview Link -->
+              <a
+                class="p-1 rounded-lg bg-green-600 border-2 border-green-800 hover:bg-green-700 text-white font-bold px-6"
+                href="/election/<%= election.id %>/preview"
+                ><i class="fa fa-eye"></i> Preview</a
+              >
+              <!-- Launch Button -->
+              <button
+                onclick="launchElection(<%= election.id %>)"
+                class="p-1 rounded-lg bg-blue-600 border-2 border-blue-800 hover:bg-blue-700 text-white font-bold px-6"
+              >
+                <i class="fa fa-tags"></i> Launch
+              </button>
+            </div>
+            <% } else { %>
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Public Link Button -->
+              <a
+                target="_blank"
+                href="/election/<%= election.id %>/vote"
+                class="p-1 rounded-lg bg-purple-600 border-2 border-purple-800 hover:bg-purple-700 text-white font-bold px-6"
+              >
+                <i class="fa fa-external-link"></i> Public Link
+              </a>
+              <!-- Result Link -->
+              <a
+                href="/election/<%= election.id %>/result"
+                class="p-1 rounded-lg bg-green-600 border-2 border-green-800 hover:bg-green-700 text-white font-bold px-6"
+              >
+                <i class="fa fa-list-alt"></i> Result
+              </a>
+              <!-- End Link -->
+              <button
+                onclick="endElection(<%= election.id %>)"
+                class="p-1 rounded-lg bg-red-600 border-2 border-red-800 hover:bg-red-700 text-white font-bold px-6"
+              >
+                <i class="fa fa-flag-checkered"></i> End
+              </button>
+            </div>
+            <% } %> <% } else { %>
+            <!-- Result Button -->
+            <a
+              class="p-1 rounded-lg bg-green-600 border-2 border-green-800 hover:bg-green-700 text-white font-bold px-6"
+              href="/election/<%= election.id %>/results"
+              ><i class="fa fa-list-alt"></i> Result</a
+            >
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Add new question -->
+        <% if (!election.launched) { %>
+        <div>
+          <form
+            action="/election/<%= election.id %>/questions/add"
+            method="post"
+            class="flex flex-col md:flex-row gap-4 pt-4"
+          >
+            <div class="flex flex-col">
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                class="border-2 border-black p-2 rounded-lg"
+              />
+            </div>
+            <div class="flex flex-col">
+              <input
+                type="text"
+                name="description"
+                placeholder="Description"
+                class="border-2 border-black p-2 rounded-lg"
+              />
+            </div>
+            <div class="flex justify-center items-center">
+              <button
+                type="submit"
+                class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+        <% } %>
+
+        <!-- List of Questions -->
+        <p class="font-semibold pt-4 text-xl">Questions</p>
+        <%- include ('questionList.ejs', {questions: questions, election:
+        election}) %>
+      </div>
+    </div>
+  </body>
+</html>

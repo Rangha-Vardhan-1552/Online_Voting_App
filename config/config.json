@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres@1552",
+    "database": "voting_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres@1552",
+    "database": "voting_db_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "postgres@1552",
+    "database": "vote_db_prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
