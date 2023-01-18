@@ -24,28 +24,28 @@
         }
     </script>
   </head>
-  <body class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full">
+  <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
     <div class="flex justify-center text-blue-800">
       <%- include ('updatedHeader', {username: username}) %>
     </div>
     <div class="flex flex-col justify-center items-center p-4">
       <div class="flex flex-col justify-center md:w-2/5 w-full">
         <hr />
-        <a href="/election/<%= election.id %>" class="font-bold text-4xl hover:underline"
+        <a href="/election/<%= election.id %>" class=" mt-2 font-bold text-4xl hover:underline font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"
           ><%= election.name %></a
         >
         <div class="flex gap-2 pt-6">
-            <p class="flex items-center text-gray-600">Question:</p>
-            <p class="text-2xl"><%= question.title %></p>
+            <p class="flex items-center text-gray-600 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Question:</p>
+            <p class="text-2xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"><%= question.title %></p>
         </div>
         <div class="flex gap-2">
-            <p class="flex items-center text-gray-600">Description:</p>
-            <p class="text-xl"><%= question.description %></p>
+            <p class="flex items-center text-gray-600 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Description:</p>
+            <p class="text-xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"><%= question.description %></p>
         </div>
 
         <% if (!election.launched) { %>
           <!-- Add new option -->
-          <p class="text-black text-xl pt-6">Add Option</p>
+          <p class="text-black text-xl pt-6 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; font-bold">Add Option</p>
           <div>
             <form
               action="/election/<%= election.id %>/question/<%= question.id %>/options/add"
@@ -57,13 +57,13 @@
                   type="text"
                   name="option"
                   placeholder="Option"
-                  class="border-2 border-black p-2 rounded-lg"
+                  class="p-2 rounded-lg"
                 />
               </div>
               <div class="flex justify-center items-center">
                 <button
                   type="submit"
-                  class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+                  class="text-white font-bold bg-green-500 transition duration-200 border-2 border-green-700 p-2 rounded-lg hover:bg-green-600 px-5 py-1.5"
                 >
                   Add
                 </button>
@@ -73,11 +73,11 @@
         <% } %>
 
         <!-- List of Options -->
-        <p class="font-semibold pt-4 text-xl">Options</p>
+        <p class="font-semibold pt-4 text-xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; font-bold">Options</p>
         <div class="flex flex-col justify-center items-center p-4">
             <div class="flex flex-col gap-4 justify-center w-full p-4">
             <% if (options.length === 0) { %>
-                <h1 class="text-2xl flex justify-center text-gray-600 font-semibold">No options added</h1>
+                <h1 class="text-2xl flex justify-center text-gray-600 font-semibold font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; ">No options added</h1>
             <% } %>
             <% for (var i=0; i<options.length; i++) { %>
                 <div class="flex justify-between gap-6">

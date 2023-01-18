@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title><%= %>Online Voting Platform | Pranshu Aggarwal</title>
+    <title><%= %>Online Voting Platform | Rangha Vardhan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -53,7 +53,7 @@
       }
     </script>
   </head>
-  <body class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full">
+  <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
     <div class="flex justify-center text-blue-800">
       <%- include ('updatedHeader', {username: username}) %>
     </div>
@@ -73,24 +73,24 @@
                   >
               <% } %>
             </div>
-            <p class="text-xl text-gray-500">
+            <p class="text-xl  mt-2 text-gray-500 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">
               <%= questions.length %> Questions
             </p>
-            <p class="text-xl text-gray-500"><%= voters.length %> Voters</p>
+            <p class="text-xl  mt-2 text-gray-500 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"><%= voters.length %> Voters</p>
           </div>
           <div class="flex gap-4 items-center">
             <% if (!election.ended) { %> <% if (!election.launched) { %>
             <div class="flex flex-col md:flex-row gap-4">
               <!-- Preview Link -->
               <a
-                class="p-1 flex gap-2 items-center rounded-lg bg-green-600 border-2 border-green-800 hover:bg-green-700 text-white font-bold px-4"
+                class="p-1 flex gap-2 items-center rounded-lg bg-blue-600 border-2 border-blue-800 hover:bg-blue-700 text-white font-bold px-4"
                 href="/election/<%= election.id %>/preview"
                 ><i class="fa fa-eye"></i> Preview</a
               >
               <!-- Launch Button -->
               <button
                 onclick="launchElection(<%= election.id %>)"
-                class="p-1 flex gap-2 items-center rounded-lg bg-blue-600 border-2 border-blue-800 hover:bg-blue-700 text-white font-bold px-4"
+                class="p-1 flex gap-2 items-center rounded-lg bg-green-600 border-2 border-green-800 hover:bg-green-700 text-white font-bold px-4"
               >
                 <i class="fa fa-tags"></i> Launch
               </button>
@@ -133,7 +133,7 @@
 
         <!-- Add new question -->
         <% if (!election.launched) { %>
-        <p class="text-black text-xl pt-6">Add Question</p>
+        <p class="text-black text-xl  font-bold pt-6 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Add Question</p>
         <div>
           <form
             action="/election/<%= election.id %>/questions/add"
@@ -145,7 +145,7 @@
                 type="text"
                 name="title"
                 placeholder="Title"
-                class="border-2 border-black p-2 rounded-lg"
+                class=" p-2 rounded-lg "
               />
             </div>
             <div class="flex flex-col">
@@ -153,13 +153,13 @@
                 type="text"
                 name="description"
                 placeholder="Description"
-                class="border-2 border-black p-2 rounded-lg"
+                class=" p-2 rounded-lg"
               />
             </div>
             <div class="flex justify-center items-center">
               <button
                 type="submit"
-                class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+                class=" text-white  font-bold bg-green-500 transition duration-200  border-2 border-green-700 p-2 rounded-lg hover:bg-green-600 px-5 py-1.5"
               >
                 Add
               </button>
@@ -176,7 +176,7 @@
         <!-- Voter Section -->
 
         <!-- Add New Voter -->
-        <p class="text-xl">Add Voter</p>
+        <p class="text-xl  font-bold font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Add Voter</p>
         <form
           action="/election/<%= election.id %>/voters/add"
           method="post"
@@ -187,7 +187,7 @@
               type="text"
               name="voterID"
               placeholder="Voter ID"
-              class="border-2 border-black p-2 rounded-lg"
+              class=" p-2 rounded-lg"
             />
           </div>
           <div class="flex flex-col">
@@ -195,13 +195,13 @@
               type="password"
               name="password"
               placeholder="Password"
-              class="border-2 border-black p-2 rounded-lg"
+              class=" p-2 rounded-lg"
             />
           </div>
           <div class="flex justify-center items-center">
             <button
               type="submit"
-              class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+              class=" text-white  font-bold bg-green-500 transition duration-200 border-2 border-green-700 p-2 rounded-lg hover:bg-green-600 px-5 py-1.5"
             >
               Add
             </button>
@@ -211,7 +211,7 @@
         <!-- List of Voters -->
         <p class="font-semibold pt-4 text-xl">Voters</p>
         <% if (voters.length === 0) { %>
-          <h1 class="text-2xl flex justify-center text-gray-600 font-semibold">No voters yet</h1>
+          <h1 class="text-2xl flex justify-center text-gray-600 font-semibold font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">No voters yet</h1>
         <% } %>
         <div class="flex flex-col justify-center items-center p-4">
           <div class="flex flex-col gap-4 justify-center w-full p-4">

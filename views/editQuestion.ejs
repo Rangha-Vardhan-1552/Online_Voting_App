@@ -10,7 +10,7 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full">
+  <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
     <div class="flex justify-center text-blue-800">
       <%- include ('updatedHeader', {username: username}) %>
     </div>
@@ -18,14 +18,14 @@
       <div class="flex flex-col justify-center md:w-2/5 w-full">
         <hr />
         <div class="pt-6 flex justify-between">
-          <a href="/election/<%= election.id %>" class="font-bold text-4xl hover:underline"
+          <a href="/election/<%= election.id %>" class="font-bold text-4xl hover:underline font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"
             ><%= election.name %></a
           >
         </div>
 
         <!-- Update Question -->
         <div class="pt-6">
-          <p class="text-gray-600 text-2xl">Edit Question</p>
+          <p class="text-gray-600 text-2xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Edit Question Here</p>
           <form
             method="post"
             action="/election/<%= election.id %>/question/<%= question.id %>/update"
@@ -37,7 +37,7 @@
                 name="title"
                 value="<%= question.title %>"
                 placeholder="Title"
-                class="border-2 border-black p-2 rounded-lg"
+                class="p-2 rounded-lg"
               />
             </div>
             <div class="flex flex-col w-full">
@@ -46,18 +46,18 @@
                 name="description"
                 value="<%= question.description %>"
                 placeholder="Description"
-                class="border-2 border-black p-2 rounded-lg"
+                class=" p-2 rounded-lg"
               />
             </div>
             <div class="flex justify-center items-center w-full gap-4">
               <button
                 type="submit"
-                class="bg-green-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-green-600 px-6"
+                class="bg-green-400 transition duration-200 border-2 border-white p-2 rounded-lg hover:bg-green-600 px-6"
               >
                 Update
               </button>
               <button
-                class="bg-gray-400 transition duration-200 border-2 border-black p-2 rounded-lg hover:bg-gray-600 px-6"
+                class="bg-red-400 transition duration-200 border-2 border-white p-2 rounded-lg hover:bg-red-600 px-6"
               >
                 Cancel
               </button>
