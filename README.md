@@ -52,6 +52,5 @@ Clone the project
 
 To run tests, run the following command
 
-```bash
   npm test
 
