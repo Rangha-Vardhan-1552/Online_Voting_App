@@ -1,12 +1,21 @@
 <html>
     <head>
+        <meta name="csrf-token" content="<%= csrf %>" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script>
             function deleteQuestion(id) {
+                var token = document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content");
+
                 fetch(`/election/<%= election.id %>/question/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({
+                        _csrf: token
+                    })
                 }).then(res => {
                     if (res.ok === true) {
                         window.location.reload()

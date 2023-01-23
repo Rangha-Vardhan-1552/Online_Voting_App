@@ -11,18 +11,35 @@
     />
   </head>
   <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
-    <div class="flex justify-center text-blue-800">
-      <%- include ('updatedHeader', {username: username}) %>
+    <div class="flex flex-col justify-center items-center italic">
+      <% if (admin == true) { %>
+        <%- include ('updatedHeader', {username: username}) %>
+      <% } else { %>
+        <%- include ('header') %>
+      <% } %>
+
+      <% if (!admin) { %>
+        <div class="flex gap-2 items-center text-black text-xl">
+          <i class="fa fa-user"></i> <b><%= username %>'s</b> election
+        </div>
+      <% } %>
+
     </div>
     <div class="flex flex-col justify-center items-center p-4">
       <div class="flex flex-col justify-center md:w-2/5 w-full">
         <hr />
         <div class="pt-6">
-          <a
-            href="/election/<%= election.id %>"
-            class="font-bold text-4xl hover:underline"
-            ><%= election.name %>'s Result</a
-          >
+          <% if (admin) { %>
+            <a
+              href="/election/<%= election.id %>"
+              class="font-bold text-4xl hover:underline"
+              ><%= election.name %>'s Result</a
+            >
+          <% } else { %>
+            <p class="font-bold text-4xl"
+              ><%= election.name %>'s Result</
+            >
+          <% } %>
           <p class="pt-2 text-gray-600 text-xl"><%= votesCast %> / <%= totalVoters %> Votes Cast</p>
         </div>
 
@@ -36,13 +53,17 @@
 
                     <div class="pt-6 pl-6 flex flex-col gap-4">
                         <% for (var j=0; j<options[i].length; j++) { %>
-                                <div class="flex gap-2"><hr width="<%= data[i][j] %>%" style="height:30px; border:none; color:purple; background-color:purple;" /><p class="flex items-center gap-2 text-xl"><%= options[i][j].value %>:<b class="text-blue-700"><%= data[i][j] %>%</b></p></div>
+                          <div class="flex gap-2"><hr width="<%= data[i][j] %>%" style="height:30px; border:none; color:purple; background-color:purple;" /><p class="flex items-center gap-2 text-xl"><%= options[i][j].value %>:<b class="text-blue-700"><%= data[i][j] %>%</b></p></div>
                         <% } %>
                     </div>
                 </div>
             <% } %>
           </div>
-          <a href="/election/<%= election.id %>" class="bg-green-500 hover:bg-green-700 border-2 border-green-800 p-2 rounded-lg font-bold text-white flex justify-center mt-8">Return to Election</a>
+          <% if (admin == true) { %>
+            <a href="/election/<%= election.id %>" class="bg-green-500 hover:bg-green-700 border-2 border-green-800 p-2 rounded-lg font-bold text-white flex justify-center mt-8">Return to Election</a>
+          <% } else { %>
+            <a href="/" class="bg-blue-500 hover:bg-blue-700 border-2 border-blue-800 p-2 rounded-lg font-bold text-white flex justify-center mt-8">Home</a>
+          <% } %>
         </div>
       </div>
     </div>

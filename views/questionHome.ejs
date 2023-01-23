@@ -1,6 +1,8 @@
 <html>
   <head>
     <title><%= question.title %> | <%= election.name %> | Online Voting Platform</title>
+    <meta name="csrf-token" content="<%= csrf %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -11,11 +13,16 @@
     />
     <script>
         function deleteOption(id) {
+          var token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
             fetch(`/election/<%= election.id %>/question/<%= question.id %>/option/${id}`, {
                 method: "DELETE",
                 headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({ _csrf: token })
             }).then(res => {
                     if (res.ok === true) {
                         window.location.reload()
@@ -25,7 +32,7 @@
     </script>
   </head>
   <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
-    <div class="flex justify-center text-blue-800">
+    <div class="flex justify-center italic">
       <%- include ('updatedHeader', {username: username}) %>
     </div>
     <div class="flex flex-col justify-center items-center p-4">
@@ -52,6 +59,7 @@
               method="post"
               class="flex flex-col md:flex-row gap-4 pt-2"
             >
+              <input type="hidden" name="_csrf" value="<%= csrf %>">
               <div class="flex flex-col w-full">
                 <input
                   type="text"
@@ -69,6 +77,15 @@
                 </button>
               </div>
             </form>
+          </div>
+
+          <!-- flash message -->
+          <div class="flex flex-col justify-center items-center gap-3 pt-4">
+            <% if (messages && messages.error && messages.error.length > 0) { %>
+              <% for(var i=0; i<messages.error.length; i++) {%>
+                <div class="bg-red-300 text-red-900 font-semibold p-2 rounded-lg shadow"> <%= messages.error[i] %></div>
+              <% } %>
+            <% } %>
           </div>
         <% } %>
 

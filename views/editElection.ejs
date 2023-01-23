@@ -1,6 +1,8 @@
 <html>
   <head>
     <title>Edit Election | Online Voting Platform</title>
+    <meta name="csrf-token" content="<%= csrf %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -27,7 +29,7 @@
     </script>
   </head>
   <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
-    <div class="flex justify-center text-blue-800">
+    <div class="flex justify-center italic">
       <%- include ('header') %>
     </div>
     <div class="flex flex-col justify-center items-center p-4">
@@ -47,13 +49,14 @@
         </div>
         <hr class="mt-2" />
         <div class="pt-6">
-          <p class="font-bold text-3xl">Edit Election</p>
+          <p class="font-bold text-3xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Manage Election</p>
           <div class="flex justify-center">
             <form
               action="/election/<%= election.id %>"
               method="post"
               class="pt-8 flex flex-col gap-4 justify-center items-center"
             >
+              <input type="hidden" name="_csrf" value="<%= csrf %>">
               <div class="flex flex-col w-full">
                 <label for="name">Name</label>
                 <input
@@ -70,6 +73,15 @@
                 Update
               </button>
             </form>
+          </div>
+
+          <!-- flash message -->
+          <div class="flex flex-col justify-center items-center gap-3 pt-4">
+            <% if (messages && messages.error && messages.error.length > 0) { %>
+              <% for(var i=0; i<messages.error.length; i++) {%>
+                <div class="bg-red-300 text-red-900 font-semibold p-2 rounded-lg shadow"> <%= messages.error[i] %></div>
+              <% } %>
+            <% } %>
           </div>
         </div>
       </div>

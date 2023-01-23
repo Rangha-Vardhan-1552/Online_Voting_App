@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title><%= %>Online Voting Platform</title>
+    <title><%= %>Online Voting Platform | Rangha Vardhan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -25,18 +25,27 @@
             <% for (var i=0; i<questions.length; i++) { %>
                 <div>
                     <p class="font-bold text-xl"><%= i+1 %>. <%= questions[i].title %></p>
-                    <p class="text-stone-600"><%= questions[i].description %></p>
+                    <p class="text-gray-800"><%= questions[i].description %></p>
 
                     <div class="pt-2 pl-6">
                         <% for (var j=0; j<options[i].length; j++) { %>
-                                <li><%= options[i][j].value %></li>
+                          <div class="flex gap-2">
+                            <input
+                                class="border-2 flex items-center border-black p-2 rounded-lg"
+                                id="<%= questions[i].id %>-<%= options[i][j].id %>"
+                                type="radio"
+                                value="<%= options[i][j].id %>"
+                                name="<%= questions[i].id %>"
+                            />
+                            <label for="<%= questions[i].id %>-<%= options[i][j].id %>"><%= options[i][j].value %></label>
+                          </div>
                         <% } %>
                     </div>
                 </div>
             <% } %>
         </div>
 
-        <button class=" text-white font-bold flex justify-center mt-8 p-2 rounded-lg bg-green-400 hover:bg-green-600 border-2  ">Submit</button>
+        <a href="/election/<%= election.id %>" class="flex justify-center mt-8 p-2 rounded-lg bg-blue-400 hover:bg-blue-700 border-2 border-white text-white font-bold">Back to Home</a>
       </div>
     </div>
   </body>

@@ -1,6 +1,8 @@
 <html>
   <head>
     <title>Edit Option | Online Voting Platform</title>
+    <meta name="csrf-token" content="<%= csrf %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
@@ -10,8 +12,10 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover">
-    <div class="flex justify-center text-blue-800">
+  <body
+    class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover"
+  >
+    <div class="flex justify-center italic">
       <%- include ('updatedHeader', {username: username}) %>
     </div>
     <div class="flex flex-col justify-center items-center p-4">
@@ -27,19 +31,20 @@
 
         <!-- Update Option -->
         <div class="pt-6">
-          <p class="text-gray-600 text-2xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Edit Options Here</p>
+          <p class="text-gray-600 text-2xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Edit Option</p>
           <form
             method="post"
             action="/election/<%= election.id %>/question/<%= question.id %>/option/<%= option.id %>/update"
             class="flex flex-col gap-4 pt-4"
           >
+            <input type="hidden" name="_csrf" value="<%= csrf %>" />
             <div class="flex flex-col w-full">
               <input
                 type="text"
                 name="value"
                 value="<%= option.value %>"
                 placeholder="Value"
-                class="p-2 rounded-lg"
+                class="border-2 border-black p-2 rounded-lg"
               />
             </div>
             <div class="flex justify-center items-center w-full gap-4">
@@ -49,13 +54,23 @@
               >
                 Update
               </button>
-              <button
+              <a
+                href="/election/<%= election.id %>/question/<%= question.id %>"
                 class="text-white font-bold bg-red-400 transition duration-200 border-2 border-white p-2 rounded-lg hover:bg-red-600 px-6"
               >
                 Cancel
-              </button>
+              </a>
             </div>
           </form>
+
+          <!-- flash message -->
+          <div class="flex flex-col justify-center items-center gap-3 pt-4">
+            <% if (messages && messages.error && messages.error.length > 0) { %>
+              <% for(var i=0; i<messages.error.length; i++) {%>
+                <div class="bg-red-300 text-red-900 font-semibold p-2 rounded-lg shadow"> <%= messages.error[i] %></div>
+              <% } %>
+            <% } %>
+          </div>
         </div>
       </div>
     </div>
