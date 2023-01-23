@@ -13,7 +13,7 @@
     />
   </head>
   <body
-    class="bg-gradient-to-tl from-gray-200 to-green-500 min-h-screen w-full"
+    class="bg-[url('https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/12/Gradient_builder_2.jpg?auto=format&q=60&w=1815&h=1361.25&fit=crop&crop=faces')] bg-no-repeat bg-cover"
   >
     <div class="flex justify-center italic">
       <%- include ('header') %>
@@ -22,7 +22,7 @@
       <div class="flex flex-col justify-center md:w-2/5 w-full">
         <hr />
         <div class="flex justify-center pb-4">
-          <p class="text-4xl font-semibold pt-4"><%= election.name %></p>
+          <p class="text-4xl font-semibold pt-4 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"><%= election.name %></p>
         </div>
 
         <% if (election.ended) { %>
@@ -31,7 +31,7 @@
             </div>
         <% } else if (!election.launched) { %>
             <div class="flex justify-center">
-            <p class="text-2xl text-gray-600">
+            <p class="text-2xl text-gray-600 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">
                 This election has not been launched yet.
             </p>
             </div>
@@ -40,7 +40,7 @@
             <% if (verified) { %>
               <% if (voter.voted) { %>
                   <div class="flex justify-center">
-                      <p class="text-2xl text-gray-600">Thank you for voting.</p>
+                      <p class="text-2xl text-gray-600 font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;">Thank you for voting.</p>
                   </div>
               <% } else { %>
                 <%- include ('Ballot.ejs', {election: election, voter: voter}) %>

@@ -32,7 +32,7 @@
           <% if (admin) { %>
             <a
               href="/election/<%= election.id %>"
-              class="font-bold text-4xl hover:underline"
+              class="font-bold text-4xl hover:underline font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"
               ><%= election.name %>'s Result</a
             >
           <% } else { %>
@@ -40,7 +40,7 @@
               ><%= election.name %>'s Result</
             >
           <% } %>
-          <p class="pt-2 text-gray-600 text-xl"><%= votesCast %> / <%= totalVoters %> Votes Cast</p>
+          <p class="pt-2 text-gray-600 text-xl font-serif	font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;"><%= votesCast %> / <%= totalVoters %> Votes Cast</p>
         </div>
 
         <!-- Result -->
@@ -60,7 +60,7 @@
             <% } %>
           </div>
           <% if (admin == true) { %>
-            <a href="/election/<%= election.id %>" class="bg-green-500 hover:bg-green-700 border-2 border-green-800 p-2 rounded-lg font-bold text-white flex justify-center mt-8">Return to Election</a>
+            <a href="/election/<%= election.id %>" class="bg-green-400 hover:bg-green-600 border-2 border-white p-2 rounded-lg font-bold text-white flex justify-center mt-8">Return to Election</a>
           <% } else { %>
             <a href="/" class="bg-blue-500 hover:bg-blue-700 border-2 border-blue-800 p-2 rounded-lg font-bold text-white flex justify-center mt-8">Home</a>
           <% } %>
