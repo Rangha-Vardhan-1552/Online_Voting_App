@@ -53,4 +53,8 @@ Clone the project
 To run tests, run the following command
 
   npm test
+  
+##Deployment the Application using Render.API
+
+  https://online-voting-9g78.onrender.com/
 
